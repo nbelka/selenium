@@ -28,15 +28,13 @@ public class test4 {
         driverChrome.findElement(By.name("login")).click();
         WebElement menu = driverChrome.findElement(By.xpath("//*[@id=\"box-apps-menu\"]"));
         List<WebElement> menuItems = menu.findElements(By.cssSelector("li"));
-
         for (int i = 1; i <= menuItems.size(); i++){
-            driverChrome.findElement(By.xpath("/html/body/div[1]/div/div/table/tbody/tr/td[1]/div[3]/ul/li[" + i + "]/a")).click();
+            driverChrome.findElement(By.cssSelector("#app-:nth-child(" + i + ")")).click();
             Assert.assertTrue(driverChrome.findElements(By.cssSelector("#content h1")).size() > 0);
-            WebElement tempItemMenu = driverChrome.findElement(By.xpath("/html/body/div[1]/div/div/table/tbody/tr/td[1]/div[3]/ul/li[" + i + "]/a"));
-            List<WebElement> tempMenuItems = driverChrome.findElements(By.xpath("/html/body/div[1]/div/div/table/tbody/tr/td[1]/div[3]/ul/li[" + i + "]/ul/li"));
-            if (tempMenuItems.size() > 0){
-                for (int j = 1; j <= tempMenuItems.size(); j++){
-                    driverChrome.findElement(By.xpath("/html/body/div[1]/div/div/table/tbody/tr/td[1]/div[3]/ul/li["  + i + "]/ul/li[" + j + "]/a/span")).click();
+            int lenOfTempMenu = driverChrome.findElement(By.cssSelector("#app-:nth-child(" + i + ")")).findElements(By.cssSelector("[id^='doc-']")).size();
+            if (lenOfTempMenu > 0){
+                for (int j = 1; j <= lenOfTempMenu; j++){
+                    driverChrome.findElement(By.cssSelector("[class = 'docs'] :nth-child(" + j + ")")).click();
                     Assert.assertTrue(driverChrome.findElements(By.cssSelector("#content h1")).size() > 0);
                 }
             }
