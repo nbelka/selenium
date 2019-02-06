@@ -25,6 +25,7 @@ public class test6 {
         driverChrome.findElement(By.name("login")).click();
         driverChrome.get("http://localhost:4433/litecart/admin/?app=countries&doc=countries");
         int countOfCountryes = driverChrome.findElements(By.cssSelector("[class='row']")).size();
+        Assert.assertTrue(countOfCountryes > 1);
         if (countOfCountryes > 1){
                 arrlist = new ArrayList<String>(5);
         }
@@ -52,16 +53,22 @@ public class test6 {
 
     @Test
     public void geo_zones(){
-
         driverChrome.get("http://localhost:4433/litecart/admin/?app=geo_zones&doc=geo_zones");
         int countOfGeoZones = driverChrome.findElements(By.cssSelector("[class='row']")).size();
         for (int i = 2; i <= countOfGeoZones+1; i++){
-            driverChrome.findElement(By.cssSelector(".row:nth-child(" + i + ") > td:nth-child(3)")).click();
-            System.out.println(driverChrome.findElements(By.cssSelector("[name^=\"zones\"]")).size());
+            driverChrome.findElement(By.cssSelector(".row:nth-child(" + i + ") > td:nth-child(3) > a")).click();
+            int zones = driverChrome.findElements(By.cssSelector("td:nth-child(3) > select")).size();
+            ArrayList<String> ListOfZones = new ArrayList<String>(zones);
+            for (int j = 2; j <= zones; j++){
+                ListOfZones.add(driverChrome.findElement(By.cssSelector("tr:nth-child(" + j + ") > td:nth-child(3) > select")).getAttribute("value"));
+            }
+            ArrayList<String> ListOfZonesSorted = new ArrayList<String>(ListOfZones);
+            Collections.sort(ListOfZonesSorted);
+            System.out.println(ListOfZonesSorted);
+            System.out.println(ListOfZones);
+            Assert.assertTrue((ListOfZones.equals(ListOfZonesSorted)));
+            driverChrome.get("http://localhost:4433/litecart/admin/?app=geo_zones&doc=geo_zones");
         }
-
-
-
     }
 
     @AfterTest
