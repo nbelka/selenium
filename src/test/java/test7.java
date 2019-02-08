@@ -1,6 +1,8 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -27,13 +29,13 @@ public class test7 {
     @Test
     void productPrice(){
         driverChrome.get("http://localhost:4433/litecart");
-        String nameStart = driverChrome.findElement(By.cssSelector("#box-campaigns .campaign-price")).getText();
-        String nameStart1 = driverChrome.findElement(By.cssSelector("#box-campaigns .regular-price")).getText();
+        String salePrice = driverChrome.findElement(By.cssSelector("#box-campaigns .campaign-price")).getText();
+        String regularPrice = driverChrome.findElement(By.cssSelector("#box-campaigns .regular-price")).getText();
         driverChrome.findElement(By.cssSelector("#box-campaigns .link")).click();
-        String finish = driverChrome.findElement(By.cssSelector("#box-product .campaign-price")).getText();
-        String finish1 = driverChrome.findElement(By.cssSelector("#box-product .regular-price")).getText();
-        Assert.assertTrue(finish.equals(nameStart));
-        Assert.assertTrue(finish1.equals(nameStart1));
+        String salePricefinish = driverChrome.findElement(By.cssSelector("#box-product .campaign-price")).getText();
+        String regularPricefinish = driverChrome.findElement(By.cssSelector("#box-product .regular-price")).getText();
+        Assert.assertTrue(salePrice.equals(salePricefinish));
+        Assert.assertTrue(regularPrice.equals(regularPricefinish));
     }
 
 

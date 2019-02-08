@@ -1,6 +1,8 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.ArrayList;
+
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -53,14 +55,17 @@ public class test6 {
 
     @Test
     public void geo_zones(){
+        driverChrome.get("http://localhost:4433/litecart/admin/");
         driverChrome.get("http://localhost:4433/litecart/admin/?app=geo_zones&doc=geo_zones");
         int countOfGeoZones = driverChrome.findElements(By.cssSelector("[class='row']")).size();
+        Assert.assertTrue(countOfGeoZones > 0);
         for (int i = 2; i <= countOfGeoZones+1; i++){
             driverChrome.findElement(By.cssSelector(".row:nth-child(" + i + ") > td:nth-child(3) > a")).click();
             int zones = driverChrome.findElements(By.cssSelector("td:nth-child(3) > select")).size();
             ArrayList<String> ListOfZones = new ArrayList<String>(zones);
             for (int j = 2; j <= zones; j++){
-                ListOfZones.add(driverChrome.findElement(By.cssSelector("tr:nth-child(" + j + ") > td:nth-child(3) > select")).getAttribute("value"));
+                ListOfZones.add(new Select(driverChrome.findElement(By.cssSelector("tr:nth-child(" + j + ") > td:nth-child(3) > select"))).getFirstSelectedOption().getText());
+                ;
             }
             ArrayList<String> ListOfZonesSorted = new ArrayList<String>(ListOfZones);
             Collections.sort(ListOfZonesSorted);
