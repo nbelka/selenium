@@ -64,8 +64,6 @@ public class test6 {
             }
             ArrayList<String> ListOfZonesSorted = new ArrayList<String>(ListOfZones);
             Collections.sort(ListOfZonesSorted);
-            System.out.println(ListOfZonesSorted);
-            System.out.println(ListOfZones);
             Assert.assertTrue((ListOfZones.equals(ListOfZonesSorted)));
             driverChrome.get("http://localhost:4433/litecart/admin/?app=geo_zones&doc=geo_zones");
         }
