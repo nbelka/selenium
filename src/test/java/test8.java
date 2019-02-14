@@ -37,6 +37,11 @@ public class test8 {
 
     @Test
     public void registrations(){
+
+        /*
+            Этот тест регистрирует нового пользователя
+        */
+
         driverChrome.get(StartPage);
         driverChrome.findElement(RegisterLink).click();
 
@@ -59,6 +64,10 @@ public class test8 {
 
     @Test
     public void Login(){
+        /*
+            Этот тест проверяет возможность входа пользователя, созданного в кейсе registrations
+        */
+
         driverChrome.findElement(By.cssSelector("#box-account-login td [name=email")).sendKeys("ema111il11@email.com");
         driverChrome.findElement(By.cssSelector("#box-account-login td [name=password]")).sendKeys("12345678901");
         driverChrome.findElement(By.cssSelector("#box-account-login td [name=login]")).click();

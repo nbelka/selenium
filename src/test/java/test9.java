@@ -53,6 +53,11 @@ public class test9 {
 
     @Test
     public void AddingItemToCart(){
+
+        /*
+            Этот тест проверяет возможность добавления нового товара
+        */
+
         File image = new File("src/test/java/Duck.jpg");
         String path = image.getAbsolutePath();
         driverChrome.get(StartPage);
@@ -94,10 +99,14 @@ public class test9 {
 
     @Test
     public void isProductExists(){
+        /*
+            Этот тест проверяет наличие среди продуктов товара, созданного в кейсе AddingItemToCart
+        */
         driverChrome.findElement(Search).sendKeys("New product10111");
         Actions actions = new Actions(driverChrome);
         actions.sendKeys(Keys.ENTER).build().perform();
-        Assert.assertTrue(Integer.parseInt(driverChrome.findElement(By.cssSelector("#content > form > table > tbody > tr.footer > td")).getText().replaceAll("[^-?0-9]+", " ").split(" ")[1]) > 0);
+        Assert.assertTrue(Integer.parseInt(driverChrome.findElement(By.cssSelector("#content > form > table > tbody" +
+                " > tr.footer > td")).getText().replaceAll("[^-?0-9]+", " ").split(" ")[1]) > 0);
         //.replaceAll("[^-?0-9]+", " ").split(" "););
 
 

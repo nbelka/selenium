@@ -29,6 +29,11 @@ public class test7 {
 
     @Test
     void productNameTest(){
+        /*
+            Этот тест проверяет совпадение текста названия товара на главной странице и на странице товара
+        */
+
+
         driverChrome.get(StartPage);
         String nameStart = driverChrome.findElement(StartNameText).getText();
         driverChrome.findElement(FirstCampaignsItem).click();
@@ -38,6 +43,9 @@ public class test7 {
 
     @Test
     void productPrice(){
+        /*
+            Этот тест проверяет совпадение цен товара на главной странице и на странице товара
+        */
         driverChrome.get(StartPage);
         String salePrice = driverChrome.findElement(CampaignsCampaignPrice).getText();
         String regularPrice = driverChrome.findElement(CampaignsRegularPrice).getText();
@@ -51,6 +59,9 @@ public class test7 {
 
     @Test
     void crossedGrayPrice(){
+        /*
+            Этот тест проверяет что, обычная цена зачёркнутая и серая
+        */
         driverChrome.get(StartPage);
         String[] textcolor = driverChrome.findElement(CampaignsRegularPrice).getCssValue("color").replaceAll("[^-?0-9]+", " ").split(" ");
         String fontPrice = driverChrome.findElement(CampaignsRegularPrice).getCssValue("text-decoration-line");
@@ -60,6 +71,9 @@ public class test7 {
 
     @Test
     void salePrice(){
+        /*
+            Этот тест проверяет что, кционная жирная и красная
+        */
         driverChrome.get(StartPage);
         String[] textcolor = driverChrome.findElement(CampaignsCampaignPrice).getCssValue("color").replaceAll("[^-?0-9]+", " ").split(" ");
         Assert.assertTrue(textcolor[2].equals("0") && textcolor[3].equals("0"));
@@ -70,6 +84,9 @@ public class test7 {
 
     @Test
     void sizePrice(){
+        /*
+            акционная цена крупнее, чем обычная
+        */
         driverChrome.get(StartPage);
         String salePriceSize = driverChrome.findElement(CampaignsCampaignPrice).getCssValue("font-size").replaceAll("[^-?.0-9]+","");
         String regularPriceSize = driverChrome.findElement(CampaignsRegularPrice).getCssValue("font-size").replaceAll("[^-?.0-9]+","");
